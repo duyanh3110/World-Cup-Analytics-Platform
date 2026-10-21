@@ -1,0 +1,44 @@
+.page {
+  min-height: calc(100dvh - 64px);
+  display: grid;
+  align-items: center;
+  padding-block: 24px;
+}
+
+.card {
+  width: 100%;
+  max-width: 1000px;
+  margin-inline: auto;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.story {
+  padding: 48px;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.content {
+  padding: 48px;
+  justify-content: center;
+  min-width: 0;
+}
+
+@media (max-width: 899px) {
+  .card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .story,
+  .content {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 399px) {
+  .story,
+  .content {
+    padding: 24px;
+  }
+}
