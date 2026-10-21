@@ -1,0 +1,13 @@
+{
+  "typescript.suggest.autoImports": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.preferences.includePackageJsonAutoImports": "on",
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "js/ts.suggest.autoImports": true,
+  "js/ts.preferences.importModuleSpecifier": "non-relative",
+  "js/ts.preferences.includePackageJsonAutoImports": "on",
+  "js/ts.tsdk.path": "./node_modules/typescript/lib"
+}
