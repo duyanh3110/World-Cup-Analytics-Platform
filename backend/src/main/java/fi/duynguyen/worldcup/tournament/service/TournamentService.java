@@ -1,5 +1,7 @@
 package fi.duynguyen.worldcup.tournament.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import fi.duynguyen.worldcup.common.exception.NotFoundException;
@@ -13,6 +15,10 @@ public class TournamentService {
 
   public TournamentService(TournamentRepository tournamentRepository) {
     this.tournamentRepository = tournamentRepository;
+  }
+
+  public Page<Tournament> getAllTournaments(Pageable pageable) {
+    return tournamentRepository.findAll(pageable);
   }
 
   public Tournament getByYear(Integer year) {
