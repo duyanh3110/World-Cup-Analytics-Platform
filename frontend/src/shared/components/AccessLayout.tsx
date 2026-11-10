@@ -13,7 +13,7 @@ export function AccessLayout({ title, description, children }: AccessLayoutProps
         <Stack
           className={styles.story}
           spacing={4}
-          sx={{ bgcolor: 'primary.dark', color: 'primary.contrastText' }}
+          sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}
         >
           <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
             <SportsSoccerRoundedIcon aria-hidden="true" />

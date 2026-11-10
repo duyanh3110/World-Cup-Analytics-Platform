@@ -39,7 +39,14 @@ export function LoginPage() {
             required
             fullWidth
           />
-          <Button type="submit" variant="contained" size="large" fullWidth disableElevation>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            size="large"
+            fullWidth
+            disableElevation
+          >
             Sign in
           </Button>
         </Stack>
