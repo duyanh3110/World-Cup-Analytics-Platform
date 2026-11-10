@@ -1,0 +1,25 @@
+# Dependencies and generated output
+node_modules/
+/frontend/dist/
+/frontend/dist-ssr/
+/backend/target/
+
+# Logs and local environment files
+*.log
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.local
+
+# IDE and operating system files
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+
+# Keep shared VS Code configuration
+.vscode/*
