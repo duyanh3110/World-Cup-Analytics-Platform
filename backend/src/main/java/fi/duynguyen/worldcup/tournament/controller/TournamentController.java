@@ -34,6 +34,13 @@ public class TournamentController {
         result.getTotalPages());
   }
 
+  @GetMapping("/{id}")
+  public TournamentResponse getTournament(@PathVariable Long id) {
+    Tournament tournament = tournamentService.getTournamentById(id);
+
+    return toResponse(tournament);
+  }
+
   @GetMapping("/year/{year}")
   public TournamentResponse getTournamentByYear(@PathVariable Integer year) {
     Tournament tournament = tournamentService.getByYear(year);

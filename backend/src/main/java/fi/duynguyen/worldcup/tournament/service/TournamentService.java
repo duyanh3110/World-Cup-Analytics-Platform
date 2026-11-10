@@ -21,6 +21,11 @@ public class TournamentService {
     return tournamentRepository.findAll(pageable);
   }
 
+  public Tournament getTournamentById(Long id) {
+    return tournamentRepository.findById(id)
+        .orElseThrow(() -> new NotFoundException("Tournament not found with id: " + id));
+  }
+
   public Tournament getByYear(Integer year) {
     return tournamentRepository.findByYear(year)
         .orElseThrow(() -> new NotFoundException("Tournament not found for year: " + year));
