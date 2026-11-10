@@ -8,39 +8,40 @@ import { AdminInvitationsPage } from '@/features/invitations/pages/AdminInvitati
 import { TeamPage } from '@/features/teams/pages/TeamPage';
 import { TournamentsPage } from '@/features/tournaments/pages/TournamentsPage';
 import { createBrowserRouter, Navigate } from 'react-router';
+import { paths } from './paths';
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: paths.home,
     element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
       {
         index: true,
-        element: <Navigate to="/tournaments" replace />,
+        element: <Navigate to={paths.tournaments} replace />,
       },
       {
-        path: '/login',
+        path: paths.login,
         element: <LoginPage />,
       },
       {
-        path: '/register',
+        path: paths.register,
         element: <RegisterPage />,
       },
       {
-        path: '/invite/:token',
+        path: paths.invitation,
         element: <InvitationPage />,
       },
       {
-        path: '/admin/invitations',
+        path: paths.adminInvitations,
         element: <AdminInvitationsPage />,
       },
       {
-        path: '/tournaments',
+        path: paths.tournaments,
         element: <TournamentsPage />,
       },
       {
-        path: '/teams/:teamId',
+        path: paths.teamDetails,
         element: <TeamPage />,
       },
       {
