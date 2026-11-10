@@ -1,6 +1,7 @@
 export const paths = {
   home: '/',
   tournaments: '/tournaments',
+  tournamentDetails: '/tournaments/:tournamentId',
   teamDetails: '/teams/:teamId',
   login: '/login',
   register: '/register',

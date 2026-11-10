@@ -18,3 +18,10 @@ export async function getTournaments({
 
   return response.data;
 }
+
+export async function getTournamentById(id: string): Promise<TournamentResponse> {
+  const response = await apiClient.get<TournamentResponse>(
+    `/tournaments/${encodeURIComponent(id)}`,
+  );
+  return response.data;
+}

@@ -2,6 +2,8 @@
 import { Box, Button, Card, CardActions, CardContent, Typography } from '@mui/material';
 import type { TournamentResponse } from '@/features/tournaments/types';
 import { colors } from '@/theme';
+import { generatePath, Link } from 'react-router';
+import { paths } from '@/app/router/paths';
 
 type TournamentCardProps = {
   tournament: TournamentResponse;
@@ -9,11 +11,6 @@ type TournamentCardProps = {
 };
 
 export function TournamentCard({ tournament, alternate = false }: TournamentCardProps) {
-  function handleViewTournament() {
-    // TODO: Navigate to the tournament detail route when it is available.
-    console.log('Redirect to tournament detail view:', tournament.id);
-  }
-
   return (
     <Card elevation={0} sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <Box
@@ -32,7 +29,8 @@ export function TournamentCard({ tournament, alternate = false }: TournamentCard
         <Button
           size="small"
           endIcon={<ArrowForwardRoundedIcon />}
-          onClick={handleViewTournament}
+          component={Link}
+          to={generatePath(paths.tournamentDetails, { tournamentId: String(tournament.id) })}
           aria-label={`View ${tournament.tournamentName}`}
         >
           View tournament

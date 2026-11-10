@@ -8,6 +8,7 @@ import { AdminInvitationsPage } from '@/features/invitations/pages/AdminInvitati
 import { TeamPage } from '@/features/teams/pages/TeamPage';
 import { TournamentsPage } from '@/features/tournaments/pages/TournamentsPage';
 import { DashboardPage } from '@/features/dashboard/pages/DashboardPage';
+import { TournamentDetailsPage } from '@/features/tournaments/pages/TournamentDetailsPage';
 import { createBrowserRouter } from 'react-router';
 import { paths } from './paths';
 
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: paths.tournaments,
         element: <TournamentsPage />,
+      },
+      {
+        path: paths.tournamentDetails,
+        element: <TournamentDetailsPage />,
       },
       {
         path: paths.teamDetails,
