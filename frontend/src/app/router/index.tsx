@@ -7,7 +7,8 @@ import { InvitationPage } from '@/features/invitations/pages/InvitationPage';
 import { AdminInvitationsPage } from '@/features/invitations/pages/AdminInvitationsPage';
 import { TeamPage } from '@/features/teams/pages/TeamPage';
 import { TournamentsPage } from '@/features/tournaments/pages/TournamentsPage';
-import { createBrowserRouter, Navigate } from 'react-router';
+import { DashboardPage } from '@/features/dashboard/pages/DashboardPage';
+import { createBrowserRouter } from 'react-router';
 import { paths } from './paths';
 
 export const router = createBrowserRouter([
@@ -18,7 +19,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to={paths.tournaments} replace />,
+        element: <DashboardPage />,
       },
       {
         path: paths.login,

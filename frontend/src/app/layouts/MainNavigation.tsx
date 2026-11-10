@@ -2,8 +2,10 @@ import { AppBar, Box, Button, Container, Toolbar, Typography } from '@mui/materi
 import { Link, NavLink } from 'react-router';
 import { paths } from '@/app/router/paths';
 
-// Only include implemented destinations. Home currently redirects to tournaments.
-const navigationItems = [{ label: 'Tournaments', to: paths.tournaments }];
+const navigationItems = [
+  { label: 'Home', to: paths.home },
+  { label: 'Tournaments', to: paths.tournaments },
+];
 
 export function MainNavigation() {
   return (
