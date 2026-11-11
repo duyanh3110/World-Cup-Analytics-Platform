@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import fi.duynguyen.worldcup.common.dto.PageResponse;
 import fi.duynguyen.worldcup.tournament.dto.TournamentResponse;
+import fi.duynguyen.worldcup.tournament.dto.TournamentTeamResponse;
 import fi.duynguyen.worldcup.tournament.entity.Tournament;
+import fi.duynguyen.worldcup.tournament.entity.TournamentTeam;
 import fi.duynguyen.worldcup.tournament.service.TournamentService;
 
 @RestController
@@ -48,6 +50,21 @@ public class TournamentController {
     return toResponse(tournament);
   }
 
+  @GetMapping("{tournamentId}/teams")
+  public PageResponse<TournamentTeamResponse> getTournamentTeams(
+      @PageableDefault(size = 10, sort = "team.teamName", direction = Sort.Direction.ASC) Pageable pageable,
+      @PathVariable Long tournamentId) {
+    Page<TournamentTeamResponse> result = tournamentService.getTournamentTeamsByTournamentId(tournamentId, pageable)
+        .map(tournamentTeam -> this.toTournamentTeamResponse(tournamentTeam, tournamentId));
+    return new PageResponse<>(result.getContent(), result.getNumber(), result.getSize(), result.getTotalElements(),
+        result.getTotalPages());
+  }
+
+  @GetMapping("{tournamentId}/teams/count")
+  public long getTeamCountByTournament(@PathVariable Long tournamentId) {
+    return tournamentService.getTeamCountByTournamentId(tournamentId);
+  }
+
   private TournamentResponse toResponse(Tournament tournament) {
     return new TournamentResponse(
         tournament.getId(),
@@ -56,5 +73,17 @@ public class TournamentController {
         tournament.getHostCountry(),
         tournament.getStartDate(),
         tournament.getEndDate());
+  }
+
+  private TournamentTeamResponse toTournamentTeamResponse(TournamentTeam tournamentTeam, Long tournamentId) {
+    return new TournamentTeamResponse(
+        tournamentTeam.getId(),
+        tournamentId,
+        tournamentTeam.getTeam().getId(),
+        tournamentTeam.getTeam().getTeamName(),
+        tournamentTeam.getTeam().getFifaCode(),
+        tournamentTeam.getTeam().getConfederation(),
+        tournamentTeam.getGroupLetter(),
+        tournamentTeam.getFifaRankingPreTournament());
   }
 }
