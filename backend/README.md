@@ -85,7 +85,7 @@ During startup:
 3. Hibernate checks the entity mappings against the schema using `ddl-auto=validate`.
 4. The web server starts accepting requests.
 
-On a fresh database, Flyway applies V1 and V2. Later starts apply only pending migrations. The files in `src/main/resources/db/migration/` are the source of truth for the schema. Do not create the schema manually, edit an applied migration, or switch to `ddl-auto=update`.
+On a fresh database, Flyway applies V1, V2, and V3. Later starts apply only pending migrations. The files in `src/main/resources/db/migration/` are the source of truth for the schema. Do not create the schema manually, edit an applied migration, or switch to `ddl-auto=update`.
 
 Running tests is a separate step and is not required before each server start.
 

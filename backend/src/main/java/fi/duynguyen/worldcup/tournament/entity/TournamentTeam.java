@@ -33,12 +33,6 @@ public class TournamentTeam {
     @Column(name = "fifa_ranking_pre_tournament", nullable = true)
     private Integer fifaRankingPreTournament;
 
-    @Column(name = "elo_rating_pre_tournament", nullable = true)
-    private Integer eloRatingPreTournament;
-
-    @Column(name = "manager_name", nullable = true, length = 100)
-    private String managerName;
-
     public TournamentTeam() {
     }
 
@@ -78,19 +72,4 @@ public class TournamentTeam {
         this.fifaRankingPreTournament = fifaRankingPreTournament;
     }
 
-    public Integer getEloRatingPreTournament() {
-        return eloRatingPreTournament;
-    }
-
-    public void setEloRatingPreTournament(Integer eloRatingPreTournament) {
-        this.eloRatingPreTournament = eloRatingPreTournament;
-    }
-
-    public String getManagerName() {
-        return managerName;
-    }
-
-    public void setManagerName(String managerName) {
-        this.managerName = managerName;
-    }
 }
