@@ -109,7 +109,7 @@ export function TournamentDetailsPage() {
             {tournament.tournamentName}
           </Typography>
           <Typography sx={{ opacity: 0.85 }}>
-            Tournament overview · Host: {tournament.hostCountry ?? 'Not available'}
+            Tournament overview - Host: {tournament.hostCountry ?? 'Not available'}
           </Typography>
         </Stack>
         <Box

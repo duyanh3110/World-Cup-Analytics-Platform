@@ -2,6 +2,8 @@ import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import { Box, Button, Card, CardActions, CardContent, Typography } from '@mui/material';
 import { colors } from '@/theme';
 import type { TournamentTeamResponse } from '@/features/tournaments/types';
+import { generatePath, Link } from 'react-router';
+import { paths } from '@/app/router/paths';
 
 type TournamentTeamCardProps = {
   team: TournamentTeamResponse;
@@ -9,10 +11,6 @@ type TournamentTeamCardProps = {
 };
 
 export function TournamentTeamCard({ team, alternate = false }: TournamentTeamCardProps) {
-  function handleViewTeam() {
-    // TODO: Navigate to the team detail page after integrating real team data.
-    console.log('Redirect to team detail view:', team.teamName);
-  }
   return (
     <Card elevation={0} sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <Box
@@ -57,7 +55,8 @@ export function TournamentTeamCard({ team, alternate = false }: TournamentTeamCa
         <Button
           size="small"
           endIcon={<ArrowForwardRoundedIcon />}
-          onClick={handleViewTeam}
+          component={Link}
+          to={generatePath(paths.teamDetails, { teamId: String(team.teamId) })}
           aria-label={`View ${team.teamName}`}
         >
           View team
