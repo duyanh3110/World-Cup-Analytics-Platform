@@ -1,13 +1,10 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import axios from 'axios';
 import {
   Alert,
   Box,
   Breadcrumbs,
   Button,
-  Card,
-  CardActionArea,
-  CardContent,
   CircularProgress,
   Link,
   Stack,
@@ -18,7 +15,10 @@ import {
 import { Link as RouterLink, useParams } from 'react-router';
 import { paths } from '@/app/router/paths';
 import { useTournament } from '@/features/tournaments/hooks/useTournament';
+import { TournamentOverview } from '@/features/tournaments/components/TournamentOverview';
+import { TournamentTeams } from '@/features/tournaments/components/TournamentTeams';
 import { colors } from '@/theme';
+import { useTeamCount } from '@/features/tournaments/hooks/useTeamCount';
 
 const sections = ['Overview', 'Teams', 'Matches', 'Statistics'];
 
@@ -33,6 +33,7 @@ export function TournamentDetailsPage() {
     refetch,
     isFetching,
   } = useTournament(tournamentId);
+  const { data: teamCount } = useTeamCount(tournamentId);
 
   if (!tournamentId || !/^[1-9]\d*$/.test(tournamentId)) {
     return (
@@ -77,13 +78,6 @@ export function TournamentDetailsPage() {
       </Stack>
     );
   }
-
-  const summary = [
-    { label: 'Host', value: tournament.hostCountry ?? 'Not available' },
-    { label: 'Edition', value: tournament.year },
-    { label: 'Matches', value: '—' },
-    { label: 'Teams', value: '—' },
-  ];
 
   return (
     <Stack component="main" spacing={3}>
@@ -161,102 +155,17 @@ export function TournamentDetailsPage() {
           aria-labelledby={`tournament-tab-${index}`}
           tabIndex={0}
         >
-          {index === 0 ? (
-            <Stack spacing={4}>
-              <Box component="section" aria-labelledby="tournament-summary-heading">
-                <Typography
-                  id="tournament-summary-heading"
-                  component="h2"
-                  variant="subtitle2"
-                  sx={{ mb: 2, fontWeight: 700 }}
-                >
-                  THE TOURNAMENT AT A GLANCE
-                </Typography>
-                <Box
-                  sx={{
-                    display: 'grid',
-                    gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
-                    gap: 2,
-                  }}
-                >
-                  {summary.map((item) => (
-                    <Card key={item.label} elevation={0} sx={{ borderRadius: 0 }}>
-                      <CardContent>
-                        <Typography variant="overline" color="text.secondary">
-                          {item.label}
-                        </Typography>
-                        <Typography
-                          variant="h6"
-                          component="p"
-                          color="primary"
-                          sx={{ fontWeight: 700 }}
-                        >
-                          {item.value}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </Box>
-                <Typography
-                  variant="caption"
-                  color="text.secondary"
-                  sx={{ display: 'block', mt: 1 }}
-                >
-                  Match and team totals are not available yet.
-                </Typography>
-              </Box>
-
-              <Box component="section" aria-labelledby="tournament-explore-heading">
-                <Typography
-                  id="tournament-explore-heading"
-                  component="h2"
-                  variant="h6"
-                  sx={{ mb: 2, fontWeight: 700 }}
-                >
-                  EXPLORE TOURNAMENT DATA
-                </Typography>
-                <Box
-                  sx={{
-                    display: 'grid',
-                    gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
-                    gap: 2,
-                  }}
-                >
-                  {[
-                    {
-                      title: 'Participating teams',
-                      description: 'Browse national teams and squads',
-                      section: 1,
-                    },
-                    {
-                      title: 'Matches & results',
-                      description: 'Explore fixtures, scores and statistics',
-                      section: 2,
-                    },
-                  ].map((item) => (
-                    <Card key={item.title} elevation={0} sx={{ borderRadius: 0 }}>
-                      <CardActionArea
-                        onClick={() => setTab(item.section)}
-                        sx={{ minHeight: 170, height: '100%', alignItems: 'flex-start' }}
-                      >
-                        <CardContent sx={{ p: 3 }}>
-                          <Typography
-                            component="h3"
-                            variant="h6"
-                            color="primary"
-                            sx={{ mb: 1, fontWeight: 700 }}
-                          >
-                            {item.title}
-                          </Typography>
-                          <Typography variant="body2">{item.description}</Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </Card>
-                  ))}
-                </Box>
-              </Box>
-            </Stack>
-          ) : (
+          {index === 0 && tab === 0 && (
+            <TournamentOverview
+              tournament={tournament}
+              teamCount={teamCount}
+              onSelectSection={setTab}
+            />
+          )}
+          {index === 1 && tab === 1 && (
+            <TournamentTeams key={tournamentId} tournamentId={tournamentId} />
+          )}
+          {index > 1 && tab === index && (
             <Alert severity="info">{label} data for this tournament is not available yet.</Alert>
           )}
         </Box>
